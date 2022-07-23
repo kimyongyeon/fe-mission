@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>parcel hello</h1>
+
+    <h1 id="countLabel"></h1>
+    <button id="countButton">count</button>
+
+    <button id="countButton2">count2</button>
+  </body>
+
+  <script>
+    class AbsMemberService {
+      #name = "";
+      #phone = 1234;
+      #addr = "";
+      constructor(n, p, a) {
+        name = n;
+        phone = p;
+        addr = a;
+      }
+      print() {
+        console.log(`name = ${name}, phone = ${phone}, addr = ${addr}`);
+      }
+
+      get name() {
+        return name;
+      }
+
+      set name(n) {
+        name = n;
+      }
+    }
+
+    const abs = new AbsMemberService("ecmascript6", 1234, "ecma script addr ");
+    // abs.name = "21212321";
+    console.log(abs.name);
+    abs.print();
+
+    // 초기화
+    function MemberService() {
+      var name = "";
+      var phone = 0;
+      var addr = "";
+
+      return {
+        init: function (n, p, a) {
+          name = n;
+          phone = p;
+          addr = a;
+        },
+        print: function () {
+          console.log(`name = ${name}, phone = ${phone}, addr = ${addr}`);
+        },
+      };
+    }
+
+    const ms = new MemberService();
+    ms.init("kimyongyeon", 01012341234, "seoul sang do dong");
+    ms.print();
+
+    // count 증감하는 함수
+    const count = (function (initCount) {
+      var c = initCount;
+      return function () {
+        return ++c;
+      };
+    })(1);
+    const log = console.log;
+    log(count());
+    log(count());
+    log(count());
+
+    // 토클 버튼 함수
+    const toggle = (function () {
+      let tog = false;
+      return function () {
+        tog = !tog;
+        return tog;
+      };
+    })();
+
+    log(toggle());
+    log(toggle());
+    log(toggle());
+
+    const setTimeTest = function () {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(function () {
+          log(i);
+        }, 100);
+
+        // (function (i) {
+        //   setTimeout(function () {
+        //     log(i);
+        //   }, 100);
+        // })(i);
+      }
+    };
+
+    setTimeTest();
+
+    function Member() {
+      // this.name = "hello world";
+      var name = "hello world";
+      return {
+        getName: function () {
+          return name;
+        },
+        setName: function (n) {
+          name = n;
+        },
+      };
+    }
+
+    var m = new Member();
+    console.log(m.getName());
+    m.setName("edit hello ");
+    console.log(m.getName());
+    // m.name = "hello dark";
+    // console.log(m.name);
+  </script>
+</html>
