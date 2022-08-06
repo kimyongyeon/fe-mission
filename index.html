@@ -8,5 +8,112 @@
   </head>
   <body>
     <h1>parcel hello</h1>
+
+    <h2>로그인</h2>
+    <div class="wrap-login" id="wrap-login">
+      <input type="text" placeholder="id" class="id" onchange="member.inputId()">
+      <input type="text" placeholder="password" class='pass' onchange="member.inputPass()">
+      <button class="login" onclick="member.login()">로그인</button>
+      <button class="join" onclick="member.join()">회원가입</button>
+      <button class="cancel" onclick="member.cancel()">취소</button>
+      <div class="member-list"></div>
+    </div>
+
+    <script>
+
+       const loginInfo = [
+         {id: 'admin', pass: '1234'},
+         {id: 'guest', pass: '5678'},
+         {id: '순희', pass: 'asdf1234'},
+         {id: '영수', pass: 'asdf!@34'},
+       ];
+
+       let element = document.querySelector("#wrap-login");
+       element.classList.contains('id').addEventListener('click', function(){
+         element.classList.add('id');
+         element.classList.remove('pass');
+       });
+
+       export class Member {
+         constructor(id, pass) {
+           this.id = id;
+           this.pass = pass;
+         }
+         inputId(e) {
+           this.id = e.target.value;
+         }
+         inputPass(e) {
+           this.pass = e.target.value;
+         }
+         login() {
+           this.isIdPassvalidation();
+           if(loginInfo.filter(member => member.id == this.id && member.pass == this.pass)) {
+             alert("로그인 성공");
+           } else {
+             alert("로그인 실패");
+           }
+         }
+         cancel() {
+           const result = confirm('정말 취소하시겠습니까?');
+           if (result) {
+             alert('취소되었습니다.');
+           } else {
+             alert('취소되지 않았습니다.');
+           }
+         }
+         join() {
+           this.isIdPassvalidation();
+           // 디스트럭처링
+           loginInfo.push({id : this.id, pass : this.pass});
+         }
+
+         isIdPassvalidation() {
+           if (!this.id && !this.pass) {
+             alert('아이디와 비밀번호를 입력해주세요.');
+             throw new Error('아이디와 비밀번호를 입력해주세요.');
+           }
+         }
+
+       }
+
+       let member = new Member('user', 'pass');
+       member.login();
+       member.cancel();
+       member.join();
+
+
+       // 요구조건 : cdn을 이용한 jQuery로 selector를 활용해도 무관
+       // 로그인 => 성공시 => 팝업노출('로그인 성공');
+       // 로그인 => 실패시 => 팝업노출('로그인 실패');
+       // 취소 => confirm => 진짜로 취소하겠습니까? => yes reload, no 팝업만 close
+       // 회원가입 => loginInfo 저장소에 아이디와 패스워드를 저장하시오. array.push
+       // 회원탈퇴 기능 추가, 회원 탈퇴 추가 하기
+       // 회원목록 출력하시오
+
+
+       // 90점이상 A
+       // 80점이상 B
+       // 70점이하 C
+       // 함수를 만드시오.
+
+        // 경품 추천기
+        const lotto = [1,2,3,4,5];
+        function 경품추천기() {
+          return lotto[Math.floor(Math.random() * lotto.length)];
+        }
+
+        function f1(a, b) {
+          return a + b; // primitype => number...
+        }
+        f1(1, '2');
+        function f2(a, b) { // NaN
+          return parseInt(a) + parseInt(b);
+        }
+        // parseInt => 문자열 --> 숫자
+        // 223423423 + ''
+        // 123234.234234 --> String(1231231.123123123)
+        // 23234.23424234.toFixed(2) --> 23234.23
+
+    </script>
   </body>
 </html>
