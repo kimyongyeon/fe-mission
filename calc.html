@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>계산기 switch문</title>
+</head>
+<body>
+    <h1>스위치 계산기</h1>
+    <div class="wrap">
+        <input type="text" data-id="num1">
+        <input type="text" data-id="num2">
+        <button data-action="+">+</button>
+        <button data-action="-">-</button>
+        <button data-action="*">*</button>
+        <button data-action="/">/</button>
+    </div>
+    <div id="result">
+    </div>
+    <script>
+        const wrap = document.querySelector('.wrap');
+        let num1, num2;
+        let historyResult = [];
+
+        wrap.addEventListener("change", function(e) {
+            e.preventDefault();
+            console.log(e.target.value);
+            if(e.target.dataset.id === "num1") {
+                num1 = Number(e.target.value);
+            } else {
+                num2 = Number(e.target.value);
+            }
+        });
+
+        wrap.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (e.target.dataset.action) {
+                let result = calc(e.target.dataset.action);
+                historyResult.push(result);
+                document.writeln(historyResult.join('<br>'));
+            }
+        })
+        function calc(num) {
+            let total = 0;
+            switch (num) {
+                case "+":
+                    total = num1 + num2;
+                    break;
+                case "-":
+                    total = num1 - num2;
+                    break;
+                case "*":
+                    total = num1 * num2;
+                    break;
+                case "/":
+                    total = num1 / num2;
+                    break;
+                default:
+                    total = 0;
+                    break;
+            }
+            return total;
+        }
+    </script>
+</body>
+</html>

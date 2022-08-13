@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node index.js",
     "debug": "nodemon index.js",
-    "html": "parcel index.html"
+    "html": "parcel index.html",
+    "iter": "nodemon src/iterable.js"
   },
   "keywords": [],
   "author": "",
