@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>클래스</h1>
+    <script>
+
+      // es5, es6, es-next
+        class Member {
+          #privatName = 12313123;
+          constructor() {
+            this.name = 123123
+            this.#privatName = 12313123;
+          }
+
+        }
+
+        const person = {
+          name: '123123',
+          phone: 12312312
+        }
+        const person1 = {
+          name: '123123',
+          phone: 12312312
+        }
+        const person2 = {
+          name: '123123',
+          phone: 12312312
+        }
+
+        function Member() {
+          this.name = "123123123"
+          this.phone = 123123123;
+          this.fnName = function() {
+            return this.name;
+          }
+        }
+
+        // 생성자 주입
+        // 함수형 주입
+
+        // 순수 객체지향 ... X
+        // 프로토타입 객제지향 언어
+
+        // 오버라이딩, 오버로딩 => 다형성
+        // 오버라이딩 : 파라미터나 리턴타입이 다르면 다른함수로 생각하게 만드는 기법 - js fail
+        // 오버로딩 : 재선언 - js ok
+
+        // 추상화 : JS - X, TS: 구현은 없고, 선언과 계약만 존재한다.
+        // 상속 : Prototype, Proto
+
+        class MemberCls { // 모듈화
+
+          setPhone(phone) { // 캡슐화
+            this.phone = phone;
+          }
+
+          setName(name) {
+            this.#name = name;
+            return this;
+          }
+
+          getName() {
+            return this.#name;
+            return this; // 빌더패턴
+          }
+
+          set name(name) {
+            this.#name = name;
+          }
+
+          get name() {
+            return #name;
+          }
+
+          constructor(name, phone) { // DI = 의존성 주입, 생성자
+            this.#name = 3421423;
+            this.#phone = '';
+          }
+        }
+
+        const instanceMember = new MemberCls() // 체이닝
+                                    .setName(234234)
+                                    .setPhone(2342423); // 인스턴스
+
+        instanceMember.__proto__.name = 123123123;
+        MemberCls.prototype.name = 123123123; // 부모으로 스코프 체인을 발생해서 찾는 방법
+        instanceMember.setName(123123);
+        instanceMember.getName();
+        instanceMember.name
+        instanceMember.name = 23213
+        instanceMember.phone =123123123;
+
+        function test(n) {
+          return n;
+        }
+        test('hello world');
+
+        console.log(typeof test);
+
+        // 선언, 초기화, 할당
+        // test2();
+        eval('function test2(){ return "test" }; test2();');
+
+        const f = Function('n', 'helloworld');
+        const arry = [2,3,4,5];
+        arry.length;
+        const array = Array(1,23,3,4);
+
+    </script>
+</body>
+</html>

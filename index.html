@@ -11,11 +11,18 @@
 
     <h2>로그인</h2>
     <div class="wrap-login" id="wrap-login">
-      <input type="text" placeholder="id" class="id" onchange="member.inputId()">
-      <input type="text" placeholder="password" class='pass' onchange="member.inputPass()">
+      <input type="text" placeholder="id" class="id" onchange="member.inputId(this.value)">
+      <input type="text" placeholder="password" class='pass' onchange="member.inputPass(this.value)">
+
       <button class="login" onclick="member.login()">로그인</button>
       <button class="join" onclick="member.join()">회원가입</button>
       <button class="cancel" onclick="member.cancel()">취소</button>
+
+      <h2>이벤트 위임</h2>
+      <button class="login" data-action="login">로그인-이벤트위임</button>
+      <button class="join" data-action="join">회원가입-이벤트위임</button>
+      <button class="cancel" data-action="cancel">회원가입-이벤트위임</button>
+
       <div class="member-list"></div>
     </div>
 
@@ -29,29 +36,47 @@
        ];
 
        let element = document.querySelector("#wrap-login");
-       element.classList.contains('id').addEventListener('click', function(){
-         element.classList.add('id');
-         element.classList.remove('pass');
+       element.addEventListener('click', function(e){
+         // console.log(e.currentTarget);
+         // console.log(e.target);
+         // console.log('dataset ====> ', e.target.dataset['action']);
+         switch(e.target.dataset['action']) {
+           case "login":
+             member.login();
+             break;
+           case "join":
+             member.join();
+             break;
+           case "cancel":
+             member.cancel();
+             break;
+           default:
+             console.log('event fallback');
+         }
        });
 
-       export class Member {
+       class Member {
          constructor(id, pass) {
            this.id = id;
            this.pass = pass;
          }
-         inputId(e) {
-           this.id = e.target.value;
+         inputId(val) {
+           console.log(val);
+           this.id = val;
          }
-         inputPass(e) {
-           this.pass = e.target.value;
+         inputPass(val) {
+           this.pass = val;
          }
          login() {
            this.isIdPassvalidation();
-           if(loginInfo.filter(member => member.id == this.id && member.pass == this.pass)) {
+           if(this.isLogin()) {
              alert("로그인 성공");
            } else {
              alert("로그인 실패");
            }
+         }
+         isLogin() {
+           return loginInfo.filter(member => member.id == this.id && member.pass == this.pass).length > 0;
          }
          cancel() {
            const result = confirm('정말 취소하시겠습니까?');
@@ -65,6 +90,7 @@
            this.isIdPassvalidation();
            // 디스트럭처링
            loginInfo.push({id : this.id, pass : this.pass});
+           alert(JSON.stringify(loginInfo));
          }
 
          isIdPassvalidation() {
@@ -77,9 +103,9 @@
        }
 
        let member = new Member('user', 'pass');
-       member.login();
-       member.cancel();
-       member.join();
+       // member.login();
+       // member.cancel();
+       // member.join();
 
 
        // 요구조건 : cdn을 이용한 jQuery로 selector를 활용해도 무관
@@ -92,26 +118,24 @@
        // 브라우저 꺼도 남아있게 처리 하기, cookie, localStorage
        // 페이징 처리 (1,2,3... , 더보기... )
 
-
-
        // 90점이상 A
        // 80점이상 B
        // 70점이하 C
        // 함수를 만드시오.
 
         // 경품 추천기
-        const lotto = [1,2,3,4,5];
-        function 경품추천기() {
-          return lotto[Math.floor(Math.random() * lotto.length)];
-        }
-
-        function f1(a, b) {
-          return a + b; // primitype => number...
-        }
-        f1(1, '2');
-        function f2(a, b) { // NaN
-          return parseInt(a) + parseInt(b);
-        }
+        // const lotto = [1,2,3,4,5];
+        // function 경품추천기() {
+        //   return lotto[Math.floor(Math.random() * lotto.length)];
+        // }
+        //
+        // function f1(a, b) {
+        //   return a + b; // primitype => number...
+        // }
+        // f1(1, '2');
+        // function f2(a, b) { // NaN
+        //   return parseInt(a) + parseInt(b);
+        // }
         // parseInt => 문자열 --> 숫자
         // 223423423 + ''
         // 123234.234234 --> String(1231231.123123123)

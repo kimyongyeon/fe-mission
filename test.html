@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Const, let, var 이해해보자.</title>
+</head>
+<body>
+    <h1>const, let, var</h1>
+    <button id="login">로그인</button>
+    <script>
+
+      // function event() {
+      //   console.log('event this called :: ', this);
+      //   document.querySelector('#login').addEventListener('click', function(e) {
+      //     console.log(this, e.currentTarget);
+      //   }.bind(this));
+      // }
+      // event();
+
+      var arrowEvent = () => {
+        console.log('arrowEvent this called :: ', this);
+
+        // window 객체인 경우
+        // 1. bind 매핑 후 this 넘김
+        // 2. () => 함수 일때 this 넘김
+        // 본인 객체인 경우
+        // 1. function 만들어서 this 호출
+        document.querySelector('#login').addEventListener('click', function(e) {
+          console.log(this, e.currentTarget);
+        });
+      }
+      arrowEvent();
+
+      // 익명함수 => 본인 자신
+      // document.querySelector('#login').addEventListener('click', function(e) {
+      //   console.log(this, e.currentTarget);
+      // });
+
+      // arrow => window
+      // document.querySelector('#login').addEventListener('click', (e) => {
+      //   console.log(this, e.currentTarget);
+      // });
+
+      function member(sel) {
+        this.name = '';
+        this.phone = '';
+        this.addr = '';
+
+        let self = this;
+        function test() { // 유명함수 => this => window => 무조건
+          console.log('test called :: ', this, self, sel);
+        }
+
+        var arrow = () => { // 익명함수 => this => 부모객체
+          console.log('arrow1 called :: ', this, sel);
+          var arrow = () => {
+            console.log('arrow2 called :: ', this, sel);
+          }
+          arrow();
+        }
+        arrow();
+
+        test(); // window called
+        // test.bind(this)(); // member this
+        // test.apply(this); // member this
+        // test.call(this); // member this
+      }
+
+      member(1); // window
+
+      let member1 = new member(2); // member <== this
+      console.log(member1);
+
+
+    </script>
+</body>
+</html>
