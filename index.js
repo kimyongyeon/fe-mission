@@ -1,88 +1,119 @@
-var name = "";
-let phone = 123123123;
-const addr = [];
-const obj = {};
-var firstName = "";
+console.log("hello world");
 
-// 변수 저장
-name = "kimyongyeon";
-// 변수 로드
-fisrtName = name; // 로드 하면서 저장하는 거
-// 변수 확인
-console.log(name);
+// const, let, var 변수 공부
+const name = "상수";
+let 변수 = "블럭스코프변수";
+var var변수 = "옛날변수-호스팅";
 
-const ObjectImmable = { a: 1, b: 2 };
-ObjectImmable.c = 123123;
+console.log("name = " + name);
+console.log(`name = ${name}`);
 
-const array2 = new Array();
-const array = [1, 2, 3, 4];
-array.push(5);
-array.push(6);
-array.push(7);
-array.push(8);
-console.log(array);
+// for (var i = 0; i < 10; i++) {
+//   setTimeout(function () {
+//     console.log(i + 1); // 0, 1, .... 9
+//   }, 100);
+// }
 
-let object = { a: 1, b: 2 }; // {a: 1, b: 2}
-let object3 = object; // 얇은 복사
-let object2 = { ...object }; // 깊은 복사
-object2.b = 123123; // {a: 1, b: 123123}
-// console.log(object === object2);
-console.log(object, object2);
-
-// OOP - SOLID 
-// S : 단일 책임 원칙 
-// O : 개방/패쇄 원칙 
-// I : 인터페이스 분리 
-// L : 리스코프 원칙 
-// D : 의존성 주입 원칙
-
-class A {
+// for, while, foreach, if, switch
+// for (;;) {
+//   console.log("무한루프");
+// }
+// while (true) {
+// }
+// do {
+// } while(true)
+// for문을 이용해서 1~10 더하는 함수를 만들어보세요.
+// if
+const a = 90;
+const b = 80;
+const c = 70;
+if (a > 80) {
+  console.log("A");
+}
+if (b > 70) {
+  console.log("B");
+}
+if (c > 60) {
+  console.log("C");
 }
 
-class B {
-  constructor(a) {
-    const b = a;
+if (a > 80) {
+  console.log("A");
+} else if (b > 70) {
+  console.log("B");
+} else {
+  console.log("C");
+}
+
+const list = [1, 2, 3, 4, 5];
+for (var i of list) {
+  console.log(i); // value
+}
+for (var i in list) {
+  console.log(i); // index
+  console.log(">>> ", list[i]);
+}
+
+const member = [{ id: "user1", pass: "1111" }]; // 주어진 저장된 데이터
+const loginY = { id: "user1", pass: "1111" }; // 성공
+const loginIdN = { id: "user2", pass: "1111" }; // 아이디만 실패
+const loginPwN = { id: "user2", pass: "1112" }; // 패스워드 실패
+
+// array
+const memberList = []; // new Array();
+
+// 리스트 아이템 추가
+memberList.push(1);
+memberList.push(2);
+memberList.push(3);
+console.log(memberList); // 1, 2, 3
+
+// 리스트 아이템 삭제
+memberList.splice(1, idx);
+
+// 리스트 아이템 수정
+// 1. list 값을 찾아서 해당 속성을 변경하는 방법 Object.assign, 전개연사자
+// 모던 방식
+memberList = [...memberList, { id: "user1" }]; // 수정
+// 2. list 값에서 해당 값을 삭제 후에 추가하는 방법
+for (var i = 0; i < memberList.length; i++) {
+  // 클래식 방식
+  const m = memberList[i]; // 해당 인덱스 값 추출
+  m.id = "user02"; // 수정하는 포인트
+  memberList.splice(1, i); // 삭제하는 포인트
+  memberList.push(m); // 추가 포인트
+}
+
+// for, if 성공하면, true, 실패하면 false => switch
+isLogin(loginY.id, loginY.pass);
+isLogin(loginIdN.id, loginIdN.pass);
+isLogin(loginPwN.id, loginPwN.pass);
+
+// isLogin 함수를 완성하시요.
+function 로그인체크(id, pw) {} // 비교문 TEST OK
+function 회원가입(member) {} // 차주
+function 회원수정(member) {} // 차차주
+function 회원탈퇴(member) {} // 차차차주
+
+successYn(200);
+successYn(401);
+
+function successYn(resultCode) {
+  switch (resultCode) {
+    case 200:
+      console.log("로그인 성공");
+      break;
+    case 401:
+      console.log("아이디 실패");
+      break;
+    case 402:
+      console.log("패스워드 실패");
+      break;
+    case 403:
+      console.log("로그인 실패");
+      break;
+    default:
+      console.log("예외상황");
+      break;
   }
 }
-const b = new B(new A());
-
-interface Calc {
-  add();
-}
-
-class CalcImpl implements Calc {
-  add() {
-    console.log("add call");
-  }
-}
-
-function add(a, b) {
-}
-
-add = (a, b) => a + b;
-
-
-// js -> ts (super set )
-
-// interface : 구현체가 없다. 
-// abstract class 
-// class 
-
-// instance 방법
-const ob = {}; // 싱글톤패턴 
-
-function Ob() {
-
-}
-
-// GC : 가비지컬렉션 
-// 힙에 공간에 올라간다. 
-// 
-const ob2 = new Ob();
-ob2.add();
-ob2.muliply();
-ob2.divide();
-const ob3 = new Ob();
-const ob4 = new Ob();
-const ob5 = new Ob();
-

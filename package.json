@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node index.js",
     "debug": "nodemon index.js",
-    "html": "parcel index.html",
+    "html": "parcel capture.html",
     "iter": "nodemon src/iterable.js"
   },
   "keywords": [],
@@ -15,5 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1"
   }
 }

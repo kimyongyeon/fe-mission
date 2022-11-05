@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const today = moment(new Date());
+      const scheduleDate = moment("2022-08-23 16:15:00");
+      const scheduleMinusDate = moment(scheduleDate).subtract(1, "h");
+      const between = moment().isBetween(
+        today,
+        scheduleMinusDate,
+        undefined,
+        "[]"
+      );
+      const between2 = moment().isBetween(today, scheduleDate, undefined, "[]");
+      console.log("today :: ", today.format("hh:mm"));
+      console.log("scheduleDate :: ", scheduleDate.format("hh:mm"));
+      console.log("scheduleMinusDate :: ", scheduleMinusDate.format("hh:mm"));
+      console.log("between 스케줄-1 ~ 현재시간 :: ", between);
+      console.log("between 스케줄 ~ 현재시간 :: ", between2);
+      console.log(
+        "between 스케줄 시간전 * 스케줄 정시 최종 = :: ",
+        between2 && between
+      );
+    </script>
+  </body>
+</html>

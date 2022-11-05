@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evnet 위임</title>
+
+    <style>
+      div {
+        display: flex;
+      }
+      .green {
+        background: green;
+        padding: 5px;
+      }
+      .red {
+        background: red;
+        padding: 5px;
+      }
+      .black {
+        background: black;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="green">
+      그린
+      <div class="red">
+        레드
+        <div class="black">블랙</div>
+      </div>
+    </div>
+
+    <br />
+
+    <form action="">
+      <input type="text" placeholder="id" />
+      <input type="text" placeholder="pw" />
+      <button id="btnLogin">로그인</button>
+      <button id="btnCancel">취소</button>
+      <button id="btnJoin">회원가입</button>
+    </form>
+
+    <table>
+      <tr>
+        <td><input type="checkbox" />1</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" />1</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" />1</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" />1</td>
+      </tr>
+    </table>
+
+    <script>
+      function Test() {
+        this.name = "12312312";
+      }
+
+      // 스타 : 테란, 프로토스, 저그
+
+      const n = new Test();
+      Test.prototype.id2 = "1123123123";
+      n.__proto__.id = 123123123;
+      n[Symbol("id")] = 123123123;
+      console.log(n);
+
+      const s1 = Symbol("id");
+      const s2 = Symbol("id");
+      console.log(s1 == s2);
+      console.log(s1 === s2);
+
+      const s3 = Symbol.for("id");
+      const s4 = Symbol.for("id");
+      console.log(s3 == s4);
+      console.log(s3 === s4);
+
+      const nObject = { name: "123123123" };
+      nObject.name = "kldfslkdfjlksjflksd";
+
+      const arry = [12, 12, 1, 23, 123, 123];
+      arry.push(213123);
+
+      document.querySelector("form").addEventListener("click", function (e) {
+        e.preventDefault();
+        console.log(e.target.id);
+        console.log(e.currentTarget);
+      });
+
+      // document
+      //   .querySelector("#btnLogin")
+      //   .addEventListener("click", function (e) {
+      //     e.preventDefault();
+      //     alert("로그인₩");
+      //   });
+
+      // document
+      //   .querySelector("#btnCancel")
+      //   .addEventListener("click", function (e) {
+      //     e.preventDefault();
+      //     alert("취소");
+      //   });
+
+      document.querySelector(".black").addEventListener("click", function (e) {
+        console.log(e.currentTarget);
+      });
+      document.querySelector(".red").addEventListener("click", function (e) {
+        console.log(e.currentTarget);
+      });
+      document.querySelector(".green").addEventListener("click", function (e) {
+        console.log(e.currentTarget);
+      });
+
+      const member = { a: 123123, b: 12312123 };
+      const { a, b } = member;
+    </script>
+  </body>
+</html>
